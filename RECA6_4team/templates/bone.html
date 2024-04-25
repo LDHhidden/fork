@@ -1,0 +1,46 @@
+<!-- bone.html -->
+<!-- 이를 통해 HTML 기본 태그와 HEAD 지정한 설정 까지만을 불러온다.-->
+
+<!DOCTYPE html>
+<html lang="ko-KR">
+<!-- HEAD 뼈대는 유지 -->
+<head>    
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">   
+    <!-- CSS 파일 링크 -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <!-- 블로그 탭 타이틀 -->
+    <title>Republic!</title>
+    <style>
+        /* CSS 불러오기.. 메뉴 UI  */
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        #menu li {
+            float: left;
+        }
+
+        #menu li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #menu li a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>    
+</head>
+
+<!-- BODY 뼈대 불러오기 -->
+<body>
+    {% block body %} {% endblock %}
+</body>
+</html>
