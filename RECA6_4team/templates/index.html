@@ -1,0 +1,55 @@
+<!-- THIS FILE IS BODY.HTML -->
+
+<!-- HTML 뼈대 불러오기 -->
+<!-- 이를 통해 HTML 기본 태그와 HEAD 지정한 설정 까지만을 불러온다.-->
+{% extends "bone.html" %}
+
+<!-- <body> -->
+{% block body %}
+    <body>
+        <div class="header">
+            <h1>&nbsp;&nbsp;&nbsp;&nbsp;Republic!!</h1>
+        </div>
+
+        <!-- Menu toolbar -->
+        <ul class="submenu">
+            <nav id="menu">
+                <ul>
+                    <li><a class="menu" href="/introduce">&nbsp;Introduce</a></li>
+                    <li><a class="menu" href="/career">&nbsp;Career</a></li>
+                    <li><a class="menu" href="/gallery">&nbsp;Gallery</a></li>
+                    <li><a class="menu" href="https://github.com/safetyfirst97" target="_blank">&nbsp;GIT</a></li>
+                    <li class="search">
+                        <input type="text"></input>
+                        <button id="check" check >Search</button>
+                    </li>
+                    <li><a class="menu" href="/login">login</a></li>
+                    <li><a class="menu" href="/register">register</a></li>
+                </ul>
+            </nav>
+        </ul>
+
+        <script>
+            function redirectToGoogle() {
+                var searchQuery = document.querySelector(".search input").value;
+                if (searchQuery.trim() !== "") {
+                    var googleSearchUrl = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery);
+                    window.open(googleSearchUrl, "_blank");
+                }
+            }
+            
+            document.getElementById("check").addEventListener("click", redirectToGoogle);
+        </script>
+
+        <!-- 게시판 추가 -->
+        <div class="board">
+            <h2>Board</h2>
+            <ul>
+                <li>Study For Linux</li>
+                <li>Python</li>
+                <li>Path Of Exile</li>
+                <!-- 필요한 만큼 게시물을 추가할 수 있습니다 -->
+            </ul>
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,16 @@
+CREATE TABLE user (
+    id INTEGER NOT NULL,
+    username TEXT NOT NULL,
+    hash TEXT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE ARTICLE (
+    id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES user(id)
+);
