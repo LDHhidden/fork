@@ -68,9 +68,10 @@
                         <table>
                             <thead>
                                 <tr>
+                                    <!-- 구- 좋아요 추가 -->
+                                    <th></th>
                                     <th>제목</th>
                                     <th>유저</th>
-                                    <!-- 구- 좋아요 추가 -->
                                     <th>게시일</th>
                                     <th>좋아요</th>
                                 </tr>
@@ -81,7 +82,7 @@
                                     <td><a href="{{url_for('view',title=d['title'])}}">{{ d["title"] }}</a></td>
                                     <td>{{ d["user_id"] }}</td>
                                     <td>{{ d["datetime"] }}</td>
-                                    <td>{{d["like"]}}</td>
+                                    <td>{{ d["like"] }}</td>
                                 </tr>
                                 {% endfor %}
 

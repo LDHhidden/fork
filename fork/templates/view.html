@@ -35,7 +35,7 @@
                         <!-- Post title-->
                         <h1 class="fw-bolder mb-1">{{ title }}</h1>
                         <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">{{datetime}}</div>
+                        <div class="text-muted fst-italic mb-2">{{ datetime }}</div>
                         <!-- Post categories-->
                         <!-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
                         <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> -->
@@ -46,35 +46,37 @@
                     <section class="mb-5">
                         {{contents|safe}}
                     </section>
-                    <!-- 구- 여기에 좋아요 수와 버튼 배치-->
+                    <!-- 구- 여기에 좋아요 수 배치-->
+                    <a type="button">좋아요 👍 {{ likes }}</a>
                 </article>
-                <!-- Comments section-->
+                <!-- 구- 댓글 내용 한글로 변경(기능 미구현) -->
+                <!-- Comments section  -->
                 <section class="mb-5">
                     <div class="card bg-light">
                         <div class="card-body">
                             <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="댓글을 남겨주세요!"></textarea></form>
                             <!-- Comment with nested comments-->
                             <div class="d-flex mb-4">
                                 <!-- Parent comment-->
                                 <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                 <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                    <div class="fw-bold">리포지토리 복제</div>
+                                    GitHub.com에 리포지토리를 만들면 원격 리포지토리로 존재합니다. 리포지토리를 복제하여 컴퓨터에 로컬 복사본을 만들고 두 위치 간에 동기화할 수 있습니다.
                                     <!-- Child comment 1-->
                                     <div class="d-flex mt-4">
                                         <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                         <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                            <div class="fw-bold">리포지토리 복제 정보1</div>
+                                            GitHub.com에서 로컬 컴퓨터 또는 codespace로 리포지토리를 복제하여 병합 충돌을 보다 쉽게 해결하고, 파일을 추가 또는 제거하고, 더 큰 커밋을 푸시할 수 있습니다.
                                         </div>
                                     </div>
                                     <!-- Child comment 2-->
                                     <div class="d-flex mt-4">
                                         <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                         <div class="ms-3">
-                                            <div class="fw-bold">Commenter Name</div>
-                                            When you put money directly to a problem, it makes a good headline.
+                                            <div class="fw-bold">리포지토리 복제 정보2</div>
+                                            리포지토리를 복제할 때 GitHub.com에서 로컬 컴퓨터로 리포지토리를 복사하거나 codespace를 만드는 경우 원격 가상 머신으로 복사합니다. codespace 복제에 대한 자세한 내용은 "리포지토리에 대한 codespace 만들기"을(를) 참조하세요.
                                         </div>
                                     </div>
                                 </div>
@@ -83,8 +85,8 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                 <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                    <div class="fw-bold">리포지토리 복제</div>
+                                    기존 리포지토리를 복제하거나 다른 사람의 기존 리포지토리를 복제하여 프로젝트에 기여할 수 있습니다.
                                 </div>
                             </div>
                         </div>

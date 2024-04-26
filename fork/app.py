@@ -29,11 +29,11 @@ def after_request(response):
     return response
 
 
-# main login page
+# main login page #구- likes항목 추가
 @app.route("/")
 # @login_required
 def index():
-    data = db.execute("SELECT title,user_id,datetime FROM article")
+    data = db.execute("SELECT title,user_id,datetime,likes FROM article")
     print(data)
     return render_template("index.html",data=data)
 
@@ -159,15 +159,15 @@ def delete():
     else:
         return redirect("/private")
 
-
+#구- likes항목 추가
 @app.route("/view", methods=["GET","POST"])
 def view():
     # id = session["user_id"]
     # title = db.execute("SELECT title FROM article where user_id=?",id)
     title = request.args.get("title")
-    data = db.execute("SELECT contents,datetime FROM article where title=?",title)
+    data = db.execute("SELECT contents,datetime,likes FROM article where title=?",title)
     print(data)
-    return render_template("view.html",title=title,contents=data[0]["contents"],datetime=data[0]["datetime"])
+    return render_template("view.html",title=title,contents=data[0]["contents"],datetime=data[0]["datetime"],likes=data[0]["likes"])
 
 #구 - 좋아요 버튼 시작
 # @app.route('/')
@@ -179,12 +179,12 @@ def view():
 #     conn.close()
 #     return render_template('private.html', data=articles)
 
-@app.route('/like/<int:article_id>')
-def like_article(article_id):
-    conn = sqlite3.connect('users.db')
-    c = conn.cursor()
-    c.execute("UPDATE ARTICLE SET likes = likes + 1 WHERE id = ?", (article_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for('private'))
-#구 - 좋아요 버튼 끝
+# @app.route('/like/<int:article_id>')
+# def like_article(article_id):
+#     conn = sqlite3.connect('users.db')
+#     c = conn.cursor()
+#     c.execute("UPDATE ARTICLE SET likes = likes + 1 WHERE id = ?", (article_id,))
+#     conn.commit()
+#     conn.close()
+#     return redirect(url_for('private'))
+# #구 - 좋아요 버튼 끝
