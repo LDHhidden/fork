@@ -33,9 +33,9 @@ def after_request(response):
 # @login_required
 def index():
     
-    data = db.execute("SELECT title FROM article")
+    data = db.execute("SELECT title,user_id,datetime FROM article")
     print(data)
-    return render_template("index.html",title=data[0]["title"])
+    return render_template("index.html",data=data)
 
 
 

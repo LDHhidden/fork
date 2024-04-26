@@ -29,9 +29,24 @@
         <div id="wrapper3">
             <div id="portfolio" class="container">
                 <div class="title">
-                    <h2>Development Portfolio</h2>
-                    <span class="byline">Integer sit amet pede vel arcu aliquet pretium</span> </div>
-                <span class="column1">
+                    <h2>Development Blog</h2>
+                    <span class="byline">RECA6_4TEAM</span> </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>유저</th>
+                                <th>게시일</th>
+                            </tr>
+                            {% for d in data: %}
+                            <tr>
+                                <td><a href="{{url_for('view',title=d['title'])}}">{{ d["title"] }}</a></td><td>{{ d["user_id"] }}</td><td>{{ d["datetime"] }}</td>
+                            </tr>
+                            {% endfor %}
+
+                        </thead>
+                    </table>
+                <!-- <span class="column1">
                     <div class="box"> <a href="#"><img src="/static/images/scr01.jpg" alt="" class="image image-full" width="282" height="180"></a>
                         <h3>Vestibulum venenatis</h3>
                         <p>Fermentum nibh augue praesent a lacus at urna congue rutrum.</p>
@@ -55,7 +70,7 @@
                         <h3>Mauris vulputate dolor</h3>
                         <p>Rutrum fermentum nibh in augue praesent urna congue rutrum.</p>
                         <a href="#" class="button button-small">Etiam posuere</a> </div>
-                </span>
+                </span> -->
             </div>
         </div>
         
