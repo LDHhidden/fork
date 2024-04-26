@@ -131,11 +131,14 @@ def private():
 # edit_blog.html -> private.html
 @app.route("/edit",methods=["GET","POST"])
 def edit():
-    if request.method == "POST":
-        id = session["user_id"]
+    if request.method == "GET":
+        id = request.form.get("id")
         title = request.form.get("title")
-        data = request.form.get("editordata")
-        db.execute("INSERT INTO article(user_id,title,contents) VALUES (?,?,?)",id,title,data)
+        contents = request.form.get("contents")
+        print(id)
+        print(title)
+        print(contents)
+        db.execute("UPDATE article SET title=?, contents=? WHERE id=?",title,contents,id)
         return redirect("/private")
     else:
         return render_template("/edit_blog.html")
@@ -144,11 +147,15 @@ def edit():
 @app.route("/create", methods=["GET", "POST"])
 # @login_required
 def create():
-    if request.method == "GET":
-        return render_template("edit_blog.html")
+    if request.method == "POST":
+        id = session["user_id"]
+        title = request.form.get("title")
+        data = request.form.get("editordata")
+        db.execute("INSERT INTO article(user_id,title,contents) VALUES (?,?,?)",id,title,data)
+        return redirect("/private")
         
     else:
-        return redirect("/private")
+        return render_template("edit_blog.html")
 
 @app.route("/delete",methods=["GET","POST"])
 def delete():
@@ -168,6 +175,16 @@ def view():
     data = db.execute("SELECT contents,datetime,likes FROM article where title=?",title)
     print(data)
     return render_template("view.html",title=title,contents=data[0]["contents"],datetime=data[0]["datetime"],likes=data[0]["likes"])
+
+@app.route("/update",methods=["GET","POST"])
+def update():
+    if request.method == "GET": 
+        title = request.args.get("title")
+        data=db.execute("SELECT id,title,contents FROM article WHERE title=?",title)
+        print(data[0]["id"])
+        return render_template("blog_edit.html",id=data[0]["id"],title=data[0]["title"],content=data[0]["contents"])
+    else:
+        return redirect("/private")
 
 #구 - 좋아요 버튼 시작
 # @app.route('/')

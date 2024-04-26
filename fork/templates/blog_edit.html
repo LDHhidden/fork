@@ -3,7 +3,7 @@
 
 {% block main %}
     <div class="container">
-        <form action="/create" method="post">
+        <form action="/edit" method="post">
             <div class="section1">
                 <div class="go">
                     <h6 style="margin-top: 10px; margin-bottom: 40px; font-size: 75px; height: 100px;">Edit Blog page</h6>
@@ -11,16 +11,16 @@
 
                 <div class="input-title">
                     <span class="title">제목:</span>
-                    <input class="input" placeholder="제목을 입력하시오" type="text" name="title">
+                    <input class="input" placeholder="제목을 입력하시오" type="text" name="title" value="{{ title }}">
                     
                 </div>
             </div>  
             
             <div class="section2">
                 <div class="input-section">
-                    <form method="post">
-                        <textarea id="summernote" name="editordata"></textarea>
-                        <button type="submit">edit blog</button>
+                    <form action="/edit" method="post">
+                        <textarea id="summernote" name="editordata">{{ content }}</textarea>
+                        <button type="submit" value="{{id}}">edit blog</button>
                     </form>
                 </div>
             </div>
@@ -32,4 +32,3 @@
         });
     </script>
 {% endblock %}
-
