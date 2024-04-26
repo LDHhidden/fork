@@ -33,7 +33,6 @@ def after_request(response):
 @app.route("/")
 # @login_required
 def index():
-<<<<<<< HEAD
     title = db.execute("SELECT title FROM article where id=?",1)
     print(title)
     return render_template("index.html",title=title[0]["title"])
@@ -42,7 +41,6 @@ def index():
     data = db.execute("SELECT title,user_id,datetime FROM article")
     print(data)
     return render_template("index.html",data=data)
->>>>>>> b961f8072ef79411019b4fd980e70da469cceb1a
 
 
 
