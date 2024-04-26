@@ -122,13 +122,9 @@ def register():
 @app.route("/private", methods=["GET","POST"])
 def private():
     # 세션 존재 여부
-    if not session:
-        flash("You are accessing as a guest.")
-        return redirect("/")
-    else:
-        id = session["user_id"]
-        data = db.execute("SELECT user_id,title,datetime,likes FROM article where user_id=?",id)
-        return render_template("private.html",data=data)
+    id = session("user_id")
+    data = db.execute("SELECT user_id,title,datetime,likes FROM article where user_id=?",id)
+    return render_template("private.html",data=data)
     # return render_template("private.html")
 
 # edit_blog.html -> private.html
