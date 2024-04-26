@@ -70,10 +70,13 @@
                                     <th>제목</th>
                                     <th>유저</th>
                                     <th>게시일</th>
+                                    <!-- 구- 좋아요 추가 -->
+                                    <th>좋아요</th>
                                 </tr>
                                 {% for d in data: %}
                                 <tr>
-                                    <td><a href="{{url_for('view',title=d['title'])}}">{{ d["title"] }}</a></td><td>{{ d["user_id"] }}</td><td>{{ d["datetime"] }}</td>
+                                    <!-- 구- 좋아요 추가 -->
+                                    <td><a href="{{url_for('view',title=d['title'])}}">{{ d["title"] }}</a></td><td>{{ d["user_id"] }}</td><td>{{ d["datetime"] }}</td><td><a href="{{ url_for('like_article', article_id=d[0]) }}">Like</a></td>
                                 </tr>
                                 {% endfor %}
 
