@@ -65,20 +65,20 @@
                         . The top navbar is optional, and just for demonstration. Just create an element with the
                         <code>#sidebarToggle</code>
                         ID which will toggle the menu when clicked. -->
-                        <table>
+                        <table class="table table-hover">
                             <thead>
-                                <tr>
+                                <tr class="table-primary">
                                     <!-- 구- 좋아요 추가 -->
-                                    <th></th>
+                                    <th scope="row"></th>
                                     <th>제목</th>
                                     <th>유저</th>
                                     <th>게시일</th>
                                     <th>좋아요</th>
                                 </tr>
                                 {% for d in data: %}
-                                <tr>
+                                <tr class="table-secondary">
                                     <!-- 구- 좋아요 추가 -->
-                                    <td><input type="checkbox" id="select" value="{{ d['title'] }}"></td>
+                                    <td scope="row"><input type="checkbox" id="select" value="{{ d['title'] }}"></td>
                                     <td><a href="{{url_for('view',title=d['title'])}}">{{ d["title"] }}</a></td>
                                     <td>{{ d["user_id"] }}</td>
                                     <td>{{ d["datetime"] }}</td>
@@ -97,5 +97,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="static/js/private.js"></script>
+
+
+
     </body>
 {% endblock %}
