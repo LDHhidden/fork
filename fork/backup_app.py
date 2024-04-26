@@ -1,12 +1,11 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-# 구 - sqlite3는 추가하고 usd 지웠습니다. 이외에도 필요없는 라이브러리는 import안해도 될 듯 합니다
-from helpers import apology, login_required, lookup
-import sqlite3
+
+from helpers import apology, login_required, lookup, usd
 
 # Flask On
 app = Flask(__name__)
@@ -33,9 +32,10 @@ def after_request(response):
 @app.route("/")
 # @login_required
 def index():
-    data = db.execute("SELECT title,user_id,datetime FROM article")
+    
+    data = db.execute("SELECT title FROM article")
     print(data)
-    return render_template("index.html",data=data)
+    return render_template("index.html",title=data[0]["title"])
 
 
 
@@ -118,17 +118,17 @@ def register():
     else:
         return render_template("register.html")
 
-# 권한 함수 #구-likes 항목 추가
+# 권한 함수
 @app.route("/private", methods=["GET","POST"])
 def private():
     # 세션 존재 여부
-    if not session:
-        flash("You are accessing as a guest.")
-        return redirect("/")
-    else:
-        id = session["user_id"]
-        data = db.execute("SELECT user_id,title,datetime,likes FROM article where user_id=?",id)
-        return render_template("private.html",data=data)
+    # if not session:
+    #     flash("You are accessing as a guest.")
+    #     return redirect("/")
+    # else:
+    id = session["user_id"]
+    data = db.execute("SELECT user_id,title,datetime FROM article where user_id=?",id)
+    return render_template("private.html",data=data)
     # return render_template("private.html")
 
 # edit_blog.html -> private.html
@@ -152,6 +152,16 @@ def create():
         
     else:
         return redirect("/private")
+    
+@app.route("/delete",methods=["GET","POST"])
+def delete():
+    if request.method == "GET":
+        select = request.args.get("title")
+        db.execute("DELETE FROM article WHERE title=?",select)
+        
+        return redirect("/private")
+    else:
+        return redirect("/private")
 
 
 
@@ -163,23 +173,3 @@ def view():
     data = db.execute("SELECT contents,datetime FROM article where title=?",title)
     print(data)
     return render_template("view.html",title=title,contents=data[0]["contents"],datetime=data[0]["datetime"])
-
-#구 - 좋아요 버튼 시작
-# @app.route('/')
-# def home():
-#     conn = sqlite3.connect('users.db')
-#     c = conn.cursor()
-#     c.execute("SELECT * FROM ARTICLE")
-#     articles = c.fetchall()
-#     conn.close()
-#     return render_template('private.html', data=articles)
-
-@app.route('/like/<int:article_id>')
-def like_article(article_id):
-    conn = sqlite3.connect('users.db')
-    c = conn.cursor()
-    c.execute("UPDATE ARTICLE SET likes = likes + 1 WHERE id = ?", (article_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for('private'))
-#구 - 좋아요 버튼 끝
