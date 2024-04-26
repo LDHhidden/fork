@@ -25,14 +25,26 @@ window.addEventListener('DOMContentLoaded', event => {
 
     document.querySelector("#delete").addEventListener("click",function(){
         var link = "/delete";
-        var link1 = "/private"
+        var link1 = "/private";
         var select = document.getElementById('select');
          if( select.checked == true) {
             var value = select.value;
             location.href = link +'?title='+value;
         }else{
             location.href = link1;
-        }
+        };
+        
+    });
+    document.querySelector("#update").addEventListener("click",function(){
+        var link = "/update";
+        var link1 = "/private";
+        var select = document.getElementById('select');
+         if( select.checked == true) {
+            var value = select.value;
+            location.href = link +'?title='+value;
+        }else{
+            location.href = link1;
+        };
         
     });
     
