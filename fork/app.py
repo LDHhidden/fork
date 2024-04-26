@@ -122,7 +122,7 @@ def register():
 @app.route("/private", methods=["GET","POST"])
 def private():
     # 세션 존재 여부
-    id = session("user_id")
+    id = session["user_id"]
     data = db.execute("SELECT user_id,title,datetime,likes FROM article where user_id=?",id)
     return render_template("private.html",data=data)
     # return render_template("private.html")
