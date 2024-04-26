@@ -32,9 +32,10 @@ def after_request(response):
 @app.route("/")
 # @login_required
 def index():
-    title = db.execute("SELECT title FROM article where id=?",1)
-    print(title)
-    return render_template("index.html",title=title[0]["title"])
+    
+    data = db.execute("SELECT title FROM article")
+    print(data)
+    return render_template("index.html",title=data[0]["title"])
 
 
 
@@ -121,13 +122,13 @@ def register():
 @app.route("/private", methods=["GET","POST"])
 def private():
     # 세션 존재 여부
-    if not session:
-        flash("You are accessing as a guest.")
-        return redirect("/")
-    else:
-        id = session["user_id"]
-        data = db.execute("SELECT user_id,title,datetime FROM article where user_id=?",id)
-        return render_template("private.html",data=data)
+    # if not session:
+    #     flash("You are accessing as a guest.")
+    #     return redirect("/")
+    # else:
+    id = session["user_id"]
+    data = db.execute("SELECT user_id,title,datetime FROM article where user_id=?",id)
+    return render_template("private.html",data=data)
     # return render_template("private.html")
 
 # edit_blog.html -> private.html
@@ -149,6 +150,16 @@ def create():
     if request.method == "GET":
         return render_template("edit_blog.html")
         
+    else:
+        return redirect("/private")
+    
+@app.route("/delete",methods=["GET","POST"])
+def delete():
+    if request.method == "GET":
+        select = request.args.get("title")
+        db.execute("DELETE FROM article WHERE title=?",select)
+        
+        return redirect("/private")
     else:
         return redirect("/private")
 
